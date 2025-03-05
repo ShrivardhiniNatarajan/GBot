@@ -49,7 +49,8 @@ GBot is a Discord bot that utilizes the Gemini API to respond to user messages a
 - Checks the current time against the stored reminders.
 - If a reminder's time has been reached, it sends a message in the specified channel and removes the reminder from the list.
 
-  
+- I want to add more features in the future, such as the ability to create polls, voice and audio channels, automatically remove expired reminders, and AI-generated summaries. 
+
 ## Lessons Learned
 
 I learnt how to create AI-powered responses for users by integrating Gemini Generative AI with Discord.
