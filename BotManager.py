@@ -39,6 +39,8 @@ async def help(ctx):
     MyEmbed.add_field(name = "!set_reminder", value = "This command allows you to set reminder.", inline = False)
     MyEmbed.add_field(name = "!delete_reminder", value = "This command allows you to delete reminder.", inline = False)
     MyEmbed.add_field(name = "!list_reminders", value = "This command allows you to view the list of reminders.", inline = False)
+    MyEmbed.add_field(name = "!join", value = "This command allows the bot to enter into the voice channel.", inline = False)
+    MyEmbed.add_field(name = "!leave", value = "This command allows the bot to leave the voice channel.", inline = False)
     await ctx.send(embed = MyEmbed)
 
 @bot.command()
@@ -92,6 +94,21 @@ async def list_reminders(ctx):
     reminder_list = "\n".join([f"{r['time']} - {r['text']}" for r in reminders])
     await ctx.send(f"Reminders:\n{reminder_list}")
 
+@bot.command(pass_context=True)
+async def join (ctx):
+    if (ctx.author.voice):
+        channel=ctx.message.author.voice.channel
+        await channel.connect()
+    else:
+        await ctx.send("You are not in the voice channel,you must be in a voice channel to run this command!")
+
+@bot.command(pass_context=True)
+async def leave(ctx):
+    if (ctx.voice_client):
+        await ctx.guild.voice_client.disconnect()
+        await ctx.send("I left the channel")
+    else:
+        await ctx.send("I am not in a voice channel")
 
 asyncio.run(startcogs())
 bot.run(defaultConfig.DISCORD_SDK)
